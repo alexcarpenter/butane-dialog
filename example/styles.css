@@ -1,0 +1,71 @@
+/**
+ * Recommended dialog styling
+ */
+
+.c-dialog {
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all ease-in-out 0.2s;
+}
+
+.c-dialog[aria-hidden="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.c-dialog[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.c-dialog__content {
+  position: relative;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 3px;
+  transform: scale(.95) translateY(20px);
+  z-index: 100;
+  transition: all ease-in-out 0.2s;
+}
+
+.c-dialog.is-active .c-dialog__content {
+  transform: none;
+}
+
+.c-dialog__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .75);
+}
+
+/**
+ * Demo specific styles
+ */
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: sans-serif;
+}

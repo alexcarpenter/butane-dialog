@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Butane Dialog</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <button class="js-dialog-1" aria-controls="dialog-1">Show Dialog 1</button>
+  </main>
+
+  <div class="c-dialog" id="dialog-1" aria-hidden="true">
+    <div class="c-dialog__content" role="dialog" aria-labelledby="dialog-title-1">
+      <button data-hide-dialog>Close</button>
+      <h2 id="dialog-title-1" tabindex="0">Dialog 1</h2>
+    </div>
+    <div class="c-dialog__overlay" tabindex="-1" data-hide-dialog></div>
+  </div>
+
+  <script src="../dist/butane-dialog.umd.js"></script>
+  <script>
+    new ButaneDialog('.js-dialog-1')
+  </script>
+</body>
+</html>

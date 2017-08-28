@@ -1,0 +1,45 @@
+{
+  "name": "butane-dialog",
+  "version": "0.1.0",
+  "description": "An accessible dialog library",
+  "main": "dist/butane-dialog.cjs.js",
+  "module": "dist/butane-dialog.esm.js",
+  "browser": "dist/butane-dialog.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "lint": "eslint src",
+    "test": "node test/test.js",
+    "precommit": "npm run lint"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.18.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "rollup": "^0.46.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "dependencies": {
+    "ms": "^2.0.0"
+  },
+  "keywords": [
+    "accessibility",
+    "dialog"
+  ],
+  "author": "Alex Carpenter",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ]
+}
