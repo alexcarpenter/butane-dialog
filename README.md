@@ -9,7 +9,7 @@
 Install Butane Dialog, and add it to your `package.json` dev dependencies.
 
 ```
-$ npm install butane-dialog --save
+$ npm install butane-dialog --save-dev
 ```
 
 Then `import` it into the file where you'll use it.
