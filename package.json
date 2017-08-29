@@ -6,7 +6,7 @@
   "module": "dist/butane-dialog.esm.js",
   "browser": "dist/butane-dialog.umd.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && npm run copy",
     "dev": "rollup -c -w",
     "lint": "eslint src",
     "test": "node test/test.js",
@@ -32,6 +32,7 @@
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "dependencies": {
+    "inert-polyfill": "^0.2.3",
     "ms": "^2.0.0"
   },
   "keywords": [
