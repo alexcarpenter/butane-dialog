@@ -1,5 +1,6 @@
 'use strict'
 
+import 'inert-polyfill'
 import { focusableElements, keyCodes } from './utils'
 
 class ButaneDialog {
@@ -11,7 +12,8 @@ class ButaneDialog {
     // Setup our default dialog options
     this.options = {
       bodyActiveClass: options.bodyActiveClass ? options.bodyActiveClass : 'dialog-isOpen',
-      dialogActiveClass: options.dialogActiveClass ? options.dialogActiveClass : 'is-active'
+      dialogActiveClass: options.dialogActiveClass ? options.dialogActiveClass : 'is-active',
+      contentContainer: options.contentContainer ? options.contentContainer : '#main'
     }
 
     this.dialogButton = document.querySelector(element)
@@ -26,6 +28,12 @@ class ButaneDialog {
       this.dialogElement.querySelectorAll(focusableElements)
     )
     this.dialogHideElements = this.dialogElement.querySelectorAll('[data-hide-dialog]')
+
+    this.contentContainer = document.querySelector(this.options.contentContainer)
+
+    if (!this.contentContainer) {
+      throw new Error('No content container element was found')
+    }
 
     // Prebind the functions that will be bound in
     // addEventListener and removeEventListener to
@@ -47,6 +55,10 @@ class ButaneDialog {
     })
     // Start watching for button clicks to show dialog
     this.dialogButton.addEventListener('click', this._showDialog)
+    this.dialogHideElements.forEach(element => {
+      element.addEventListener('click', this._hideDialog)
+    })
+    this.dialogElement.addEventListener('keydown', this._checkEsc)
   }
 
   /**
@@ -64,6 +76,7 @@ class ButaneDialog {
     this.dialogElement.removeAttribute('inert')
     this.dialogElement.setAttribute('aria-hidden', false)
     this.dialogElement.classList.add(this.options.dialogActiveClass)
+    this.contentContainer.inert = true
 
     if (this._focusableElements.length > 0) {
       this._focusableElements.forEach(element => {
@@ -71,13 +84,6 @@ class ButaneDialog {
       })
       this._focusableElements[0].focus()
     }
-
-    // Add/remove event listeners
-    this.dialogHideElements.forEach(element => {
-      element.addEventListener('click', this._hideDialog)
-    })
-    this.dialogButton.removeEventListener('click', this._showDialog)
-    document.addEventListener('keydown', this._checkEsc)
   }
 
   /**
@@ -93,6 +99,7 @@ class ButaneDialog {
     this.dialogElement.inert = true
     this.dialogElement.setAttribute('aria-hidden', true)
     this.dialogElement.classList.remove(this.options.dialogActiveClass)
+    this.contentContainer.removeAttribute('inert')
 
     if (this._focusableElements.length > 0) {
       this._focusableElements.forEach(element => {
@@ -102,13 +109,6 @@ class ButaneDialog {
 
     // Focus previous active element when hiding the dialog
     this.previousActiveElement.focus()
-
-    // Add/remove event listeners
-    this.dialogHideElements.forEach(element => {
-      element.removeEventListener('click', this._hideDialog)
-    })
-    this.dialogButton.addEventListener('click', this._showDialog)
-    document.removeEventListener('keydown', this._checkEsc)
   }
 
   /**

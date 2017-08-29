@@ -7,14 +7,29 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <main>
+  <main id="main">
     <button class="js-dialog-1" aria-controls="dialog-1">Show Dialog 1</button>
+    <button class="js-dialog-2" aria-controls="dialog-2">Show Dialog 2</button>
   </main>
 
   <div class="c-dialog" id="dialog-1" aria-hidden="true">
     <div class="c-dialog__content" role="dialog" aria-labelledby="dialog-title-1">
-      <button data-hide-dialog>Close</button>
-      <h2 id="dialog-title-1" tabindex="0">Dialog 1</h2>
+      <header class="c-dialog__header">
+        <h2 id="dialog-title-1" tabindex="0">Dialog 1</h2>
+        <button data-hide-dialog>Close</button>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, molestiae ad assumenda aliquam error aspernatur id consequatur architecto distinctio odit. Veritatis, dolorem rerum obcaecati quas velit quaerat saepe veniam sint?</p>
+    </div>
+    <div class="c-dialog__overlay" tabindex="-1" data-hide-dialog></div>
+  </div>
+
+  <div class="c-dialog" id="dialog-2" aria-hidden="true">
+    <div class="c-dialog__content" role="dialog" aria-labelledby="dialog-title-2">
+      <header class="c-dialog__header">
+        <h2 id="dialog-title-2" tabindex="0">Dialog 2</h2>
+        <button data-hide-dialog>Close</button>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, molestiae ad assumenda aliquam error aspernatur id consequatur architecto distinctio odit. Veritatis, dolorem rerum obcaecati quas velit quaerat saepe veniam sint?</p>
     </div>
     <div class="c-dialog__overlay" tabindex="-1" data-hide-dialog></div>
   </div>
@@ -22,6 +37,7 @@
   <script src="./butane-dialog.umd.js"></script>
   <script>
     new ButaneDialog('.js-dialog-1')
+    new ButaneDialog('.js-dialog-2')
   </script>
 </body>
 </html>
