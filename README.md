@@ -39,7 +39,8 @@ Default options are shown below, and an explanation of each follows:
 ```es6
 const dialog = new ButaneDialog('.js-dialog', {
   bodyActiveClass: 'dialog-isOpen',
-  dialogActiveClass: 'is-active'
+  dialogActiveClass: 'is-active',
+  contentContainer: '#main'
 })
 ```
 
@@ -61,6 +62,33 @@ Customize the dialog active class.
 const dialog = new ButaneDialog('.js-dialog', {
   dialogActiveClass: 'is-active'
 })
+```
+
+### contentContainer
+
+```es6
+const dialog = new ButaneDialog('.js-dialog', {
+  contentContainer: '#main'
+})
+```
+
+## Expected DOM structure
+
+```html
+<main id="main">
+  <button class="js-dialog" aria-controls="dialog">Show Dialog</button>
+</main>
+
+<div class="c-dialog" id="dialog" aria-hidden="true">
+  <div class="c-dialog__content" role="dialog" aria-labelledby="dialog-title">
+    <header class="c-dialog__header">
+      <h2 id="dialog-title" tabindex="0">Dialog</h2>
+      <button data-hide-dialog>Close</button>
+    </header>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, molestiae ad assumenda aliquam error aspernatur id consequatur architecto distinctio odit. Veritatis, dolorem rerum obcaecati quas velit quaerat saepe veniam sint?</p>
+  </div>
+  <div class="c-dialog__overlay" tabindex="-1" data-hide-dialog></div>
+</div>
 ```
 
 ## License
