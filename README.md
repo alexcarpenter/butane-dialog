@@ -43,3 +43,26 @@ const dialog = new ButaneDialog('.js-dialog', {
 })
 ```
 
+### bodyActiveClass
+
+Customize the class that gets added to the body element when the dialog is shown.
+
+```es6
+const dialog = new ButaneDialog('.js-dialog', {
+  bodyActiveClass: 'dialog-isOpen'
+})
+```
+
+### dialogActiveClass
+
+Customize the dialog active class.
+
+```es6
+const dialog = new ButaneDialog('.js-dialog', {
+  dialogActiveClass: 'is-active'
+})
+```
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT). © 2017 Alex Carpenter
