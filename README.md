@@ -1,6 +1,6 @@
 # Butane Dialog
 
-[![butane-dialog on NPM](https://img.shields.io/npm/v/layzr.js.svg?style=flat-square)](https://www.npmjs.com/package/butane-dialog) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+[![butane-dialog on NPM](https://img.shields.io/npm/v/butane-dialog.svg?style=flat-square)](https://www.npmjs.com/package/butane-dialog) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 > A modern accessible dialog library.
 
