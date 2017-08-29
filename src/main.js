@@ -30,7 +30,6 @@ class ButaneDialog {
     // Prebind the functions that will be bound in
     // addEventListener and removeEventListener to
     // avoid losing references
-    this._toggleDialog = this.toggleDialog.bind(this)
     this._showDialog = this.showDialog.bind(this)
     this._hideDialog = this.hideDialog.bind(this)
     this._checkEsc = this.checkEsc.bind(this)
@@ -47,12 +46,7 @@ class ButaneDialog {
       element.setAttribute('tabindex', -1)
     })
     // Start watching for button clicks to show dialog
-    this.dialogButton.addEventListener('click', this._toggleDialog)
-  }
-
-  toggleDialog () {
-    const dialogShow = this.dialogElement.getAttribute('aria-hidden') === 'false'
-    return dialogShow ? this._showDialog() : this._hideDialog()
+    this.dialogButton.addEventListener('click', this._showDialog)
   }
 
   /**
