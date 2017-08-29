@@ -1,4 +1,4 @@
-# Butane Dialog
+# butane-dialog
 
 [![butane-dialog on NPM](https://img.shields.io/npm/v/butane-dialog.svg?style=flat-square)](https://www.npmjs.com/package/butane-dialog) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
@@ -6,7 +6,7 @@
 
 ## Install
 
-Install Butane Dialog, and add it to your `package.json` dev dependencies.
+Install butane-dialog, and add it to your `package.json` dev dependencies.
 
 ```
 $ npm install butane-dialog --save-dev
