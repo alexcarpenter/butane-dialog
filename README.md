@@ -36,7 +36,7 @@ ButaneDialog.init({
 
 ```html
 <main id="main">
-  <button class="js-dialog" data-butane-dialog-controls="dialog">Show Dialog</button>
+  <button data-butane-dialog-controls="dialog">Show Dialog</button>
 </main>
 
 <div class="c-dialog" id="dialog" aria-hidden="true">
