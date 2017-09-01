@@ -107,8 +107,9 @@ var createClass = function () {
 }();
 
 var ButaneDialog = function () {
-  function ButaneDialog(element) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  function ButaneDialog(element, options) {
+    var _this = this;
+
     classCallCheck(this, ButaneDialog);
 
     if (!element) {
@@ -122,12 +123,8 @@ var ButaneDialog = function () {
       contentContainer: options.contentContainer ? options.contentContainer : '#main'
     };
 
-    this.dialogButton = document.querySelector(element);
-    this.dialogId = this.dialogButton.getAttribute('aria-controls');
-
-    if (!this.dialogId) {
-      throw new Error('Dialog button requires an aria controls attribute');
-    }
+    this.dialogButton = element;
+    this.dialogId = this.dialogButton.getAttribute('data-butane-dialog-controls');
 
     this.dialogElement = document.getElementById(this.dialogId);
     this._focusableElements = Array.from(this.dialogElement.querySelectorAll(focusableElements));
@@ -146,37 +143,31 @@ var ButaneDialog = function () {
     this._hideDialog = this.hideDialog.bind(this);
     this._checkEsc = this.checkEsc.bind(this);
 
-    this.initDialog();
+    this.previousActiveElement = null;
+    this.dialogIsVisible = false;
+    this.dialogElement.setAttribute('aria-hidden', true);
+    this.dialogElement.inert = true;
+    this._focusableElements.forEach(function (element) {
+      element.setAttribute('tabindex', -1);
+    });
+
+    // Start watching for button clicks to show dialog
+    this.dialogButton.addEventListener('click', this._showDialog);
+    this.dialogHideElements.forEach(function (element) {
+      element.addEventListener('click', _this._hideDialog);
+    });
+    this.dialogElement.addEventListener('keydown', this._checkEsc);
   }
 
+  /**
+   * Show the dialog window.
+   *
+   * @param {Object}
+   * @return {null}
+   */
+
+
   createClass(ButaneDialog, [{
-    key: 'initDialog',
-    value: function initDialog() {
-      var _this = this;
-
-      this.previousActiveElement = null;
-      this.dialogIsVisible = false;
-      this.dialogElement.setAttribute('aria-hidden', true);
-      this.dialogElement.inert = true;
-      this._focusableElements.forEach(function (element) {
-        element.setAttribute('tabindex', -1);
-      });
-      // Start watching for button clicks to show dialog
-      this.dialogButton.addEventListener('click', this._showDialog);
-      this.dialogHideElements.forEach(function (element) {
-        element.addEventListener('click', _this._hideDialog);
-      });
-      this.dialogElement.addEventListener('keydown', this._checkEsc);
-    }
-
-    /**
-     * Show the dialog window.
-     *
-     * @param {Object}
-     * @return {null}
-     */
-
-  }, {
     key: 'showDialog',
     value: function showDialog(e) {
       e.preventDefault();
@@ -247,6 +238,17 @@ var ButaneDialog = function () {
   return ButaneDialog;
 }();
 
-return ButaneDialog;
+var init = function init() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  var butaneDialogs = document.querySelectorAll('[data-butane-dialog-controls]');
+  butaneDialogs.forEach(function (dialog) {
+    new ButaneDialog(dialog, options);
+  });
+};
+
+var main = { init: init };
+
+return main;
 
 })));

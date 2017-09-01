@@ -8,8 +8,8 @@
 </head>
 <body>
   <main id="main">
-    <button class="js-dialog-1" aria-controls="dialog-1">Show Dialog 1</button>
-    <button class="js-dialog-2" aria-controls="dialog-2">Show Dialog 2</button>
+    <button class="js-dialog" data-butane-dialog-controls="dialog-1">Show Dialog 1</button>
+    <button class="js-dialog" data-butane-dialog-controls="dialog-2">Show Dialog 2</button>
   </main>
 
   <div class="c-dialog" id="dialog-1" aria-hidden="true">
@@ -36,8 +36,7 @@
 
   <script src="./butane-dialog.umd.js"></script>
   <script>
-    new ButaneDialog('.js-dialog-1')
-    new ButaneDialog('.js-dialog-2')
+    ButaneDialog.init();
   </script>
 </body>
 </html>

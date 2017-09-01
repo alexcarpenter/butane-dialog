@@ -2,7 +2,7 @@
 
 [![butane-dialog on NPM](https://img.shields.io/npm/v/butane-dialog.svg?style=flat-square)](https://www.npmjs.com/package/butane-dialog) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
-> A modern accessible dialog library.
+> Accessible dialog JS library.
 
 ## Install
 
@@ -22,52 +22,12 @@ import ButaneDialog from 'butane-dialog'
 
 ```es6
 // using the default options
+ButaneDialog.init()
 
-const dialog = new ButaneDialog('.js-dialog')
-
-// using custom options
-
-const dialog = new ButaneDialog('.js-dialog', {
-  // ...
-})
-```
-
-## Options
-
-Default options are shown below, and an explanation of each follows:
-
-```es6
-const dialog = new ButaneDialog('.js-dialog', {
+// using custom options, default options listed
+ButaneDialog.init({
   bodyActiveClass: 'dialog-isOpen',
   dialogActiveClass: 'is-active',
-  contentContainer: '#main'
-})
-```
-
-### bodyActiveClass
-
-Customize the class that gets added to the body element when the dialog is shown.
-
-```es6
-const dialog = new ButaneDialog('.js-dialog', {
-  bodyActiveClass: 'dialog-isOpen'
-})
-```
-
-### dialogActiveClass
-
-Customize the dialog active class.
-
-```es6
-const dialog = new ButaneDialog('.js-dialog', {
-  dialogActiveClass: 'is-active'
-})
-```
-
-### contentContainer
-
-```es6
-const dialog = new ButaneDialog('.js-dialog', {
   contentContainer: '#main'
 })
 ```
@@ -76,7 +36,7 @@ const dialog = new ButaneDialog('.js-dialog', {
 
 ```html
 <main id="main">
-  <button class="js-dialog" aria-controls="dialog">Show Dialog</button>
+  <button class="js-dialog" data-butane-dialog-controls="dialog">Show Dialog</button>
 </main>
 
 <div class="c-dialog" id="dialog" aria-hidden="true">

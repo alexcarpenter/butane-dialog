@@ -14,7 +14,7 @@ const keyCodes = {
 };
 
 class ButaneDialog {
-  constructor (element, options = {}) {
+  constructor (element, options) {
     if (!element) {
       throw new Error('Dialog requires an element reference')
     }
@@ -26,12 +26,8 @@ class ButaneDialog {
       contentContainer: options.contentContainer ? options.contentContainer : '#main'
     };
 
-    this.dialogButton = document.querySelector(element);
-    this.dialogId = this.dialogButton.getAttribute('aria-controls');
-
-    if (!this.dialogId) {
-      throw new Error('Dialog button requires an aria controls attribute')
-    }
+    this.dialogButton = element;
+    this.dialogId = this.dialogButton.getAttribute('data-butane-dialog-controls');
 
     this.dialogElement = document.getElementById(this.dialogId);
     this._focusableElements = Array.from(
@@ -52,10 +48,6 @@ class ButaneDialog {
     this._hideDialog = this.hideDialog.bind(this);
     this._checkEsc = this.checkEsc.bind(this);
 
-    this.initDialog();
-  }
-
-  initDialog () {
     this.previousActiveElement = null;
     this.dialogIsVisible = false;
     this.dialogElement.setAttribute('aria-hidden', true);
@@ -63,6 +55,7 @@ class ButaneDialog {
     this._focusableElements.forEach(element => {
       element.setAttribute('tabindex', -1);
     });
+
     // Start watching for button clicks to show dialog
     this.dialogButton.addEventListener('click', this._showDialog);
     this.dialogHideElements.forEach(element => {
@@ -138,4 +131,13 @@ class ButaneDialog {
   }
 }
 
-module.exports = ButaneDialog;
+const init = (options = {}) => {
+  const butaneDialogs = document.querySelectorAll('[data-butane-dialog-controls]');
+  butaneDialogs.forEach(dialog => {
+    new ButaneDialog(dialog, options);
+  });
+};
+
+var main = { init };
+
+module.exports = main;
