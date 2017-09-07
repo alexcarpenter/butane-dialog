@@ -1190,7 +1190,8 @@ var init = function init() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var butaneDialogs = document.querySelectorAll('[data-butane-dialog-controls]');
-  butaneDialogs.forEach(function (dialog) {
+
+  Array.from(butaneDialogs).forEach(function (dialog) {
     new ButaneDialog(dialog, options);
   });
 };

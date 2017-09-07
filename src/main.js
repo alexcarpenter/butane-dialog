@@ -114,7 +114,8 @@ class ButaneDialog {
 
 const init = (options = {}) => {
   const butaneDialogs = document.querySelectorAll('[data-butane-dialog-controls]')
-  butaneDialogs.forEach(dialog => {
+
+  Array.from(butaneDialogs).forEach(dialog => {
     new ButaneDialog(dialog, options)
   })
 }
