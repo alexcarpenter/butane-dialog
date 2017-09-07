@@ -1,6 +1,6 @@
 {
   "name": "butane-dialog",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "description": "An accessible dialog library",
   "main": "dist/butane-dialog.cjs.js",
   "module": "dist/butane-dialog.esm.js",
@@ -32,8 +32,8 @@
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "dependencies": {
-    "inert-polyfill": "^0.2.3",
-    "ms": "^2.0.0"
+    "ms": "^2.0.0",
+    "wicg-inert": "^1.1.4"
   },
   "keywords": [
     "accessibility",

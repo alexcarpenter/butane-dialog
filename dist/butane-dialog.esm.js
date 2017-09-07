@@ -1,4 +1,4 @@
-import 'inert-polyfill';
+import 'wicg-inert';
 
 const focusableElements = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable], audio[controls], video[controls]';
 
@@ -42,24 +42,24 @@ class ButaneDialog {
     // Prebind the functions that will be bound in
     // addEventListener and removeEventListener to
     // avoid losing references
-    this._showDialog = this.showDialog.bind(this);
-    this._hideDialog = this.hideDialog.bind(this);
-    this._checkEsc = this.checkEsc.bind(this);
+    this._show = this.show.bind(this);
+    this._hide = this.hide.bind(this);
+    this._bindKeyPress = this.bindKeyPress.bind(this);
 
     this.previousActiveElement = null;
     this.dialogIsVisible = false;
     this.dialogElement.setAttribute('aria-hidden', true);
     this.dialogElement.inert = true;
-    this._focusableElements.forEach(element => {
-      element.setAttribute('tabindex', -1);
-    });
 
-    // Start watching for button clicks to show dialog
-    this.dialogButton.addEventListener('click', this._showDialog);
+    this.addEventListeners();
+  }
+
+  addEventListeners () {
+    this.dialogButton.addEventListener('click', this._show);
     this.dialogHideElements.forEach(element => {
-      element.addEventListener('click', this._hideDialog);
+      element.addEventListener('click', this._hide);
     });
-    this.dialogElement.addEventListener('keydown', this._checkEsc);
+    this.dialogElement.addEventListener('keydown', this._bindKeyPress);
   }
 
   /**
@@ -68,21 +68,18 @@ class ButaneDialog {
    * @param {Object}
    * @return {null}
    */
-  showDialog (e) {
+  show (e) {
     e.preventDefault();
     // Capture the previous active element
     this.previousActiveElement = document.activeElement;
     this.dialogIsVisible = true;
     document.body.classList.add(this.options.bodyActiveClass);
-    this.dialogElement.removeAttribute('inert');
+    this.dialogElement.inert = false;
     this.dialogElement.setAttribute('aria-hidden', false);
     this.dialogElement.classList.add(this.options.dialogActiveClass);
     this.contentContainer.inert = true;
 
     if (this._focusableElements.length > 0) {
-      this._focusableElements.forEach(element => {
-        element.setAttribute('tabindex', 0);
-      });
       this._focusableElements[0].focus();
     }
   }
@@ -93,20 +90,14 @@ class ButaneDialog {
    * @param {Object}
    * @return {null}
    */
-  hideDialog (e) {
+  hide (e) {
     e.preventDefault();
     this.dialogIsVisible = false;
     document.body.classList.remove(this.options.bodyActiveClass);
     this.dialogElement.inert = true;
     this.dialogElement.setAttribute('aria-hidden', true);
     this.dialogElement.classList.remove(this.options.dialogActiveClass);
-    this.contentContainer.removeAttribute('inert');
-
-    if (this._focusableElements.length > 0) {
-      this._focusableElements.forEach(element => {
-        element.setAttribute('tabindex', -1);
-      });
-    }
+    this.contentContainer.inert = false;
 
     // Focus previous active element when hiding the dialog
     this.previousActiveElement.focus();
@@ -118,12 +109,12 @@ class ButaneDialog {
    * @param {Object} e The event object
    * @return {null}
    */
-  checkEsc (e) {
+  bindKeyPress (e) {
     // Ensure dialog is visible before hiding
     if (this.dialogIsVisible) {
       // Hide the modal window on `esc` key press
       if (e.keyCode === keyCodes.esc) {
-        this._hideDialog(e);
+        this._hide(e);
       }
     }
   }
