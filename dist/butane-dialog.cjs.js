@@ -33,7 +33,7 @@ class ButaneDialog {
     this._focusableElements = Array.from(
       this.dialogElement.querySelectorAll(focusableElements)
     );
-    this.dialogHideElements = this.dialogElement.querySelectorAll('[data-hide-dialog]');
+    this.dialogHideElements = this.dialogElement.querySelectorAll('[data-butane-dialog-hide]');
 
     this.contentContainer = document.querySelector(this.options.contentContainer);
 

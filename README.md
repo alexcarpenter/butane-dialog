@@ -43,11 +43,11 @@ ButaneDialog.init({
   <div class="c-dialog__content" role="dialog" aria-labelledby="dialog-title">
     <header class="c-dialog__header">
       <h2 id="dialog-title" tabindex="0">Dialog</h2>
-      <button data-hide-dialog>Close</button>
+      <button data-butane-dialog-hide>Close</button>
     </header>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, molestiae ad assumenda aliquam error aspernatur id consequatur architecto distinctio odit. Veritatis, dolorem rerum obcaecati quas velit quaerat saepe veniam sint?</p>
   </div>
-  <div class="c-dialog__overlay" tabindex="-1" data-hide-dialog></div>
+  <div class="c-dialog__overlay" tabindex="-1" data-butane-dialog-hide></div>
 </div>
 ```
 
