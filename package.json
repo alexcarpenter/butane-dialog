@@ -1,6 +1,6 @@
 {
   "name": "butane-dialog",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.10",
   "description": "An accessible dialog library",
   "main": "dist/butane-dialog.cjs.js",
   "module": "dist/butane-dialog.esm.js",

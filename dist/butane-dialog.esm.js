@@ -13,33 +13,29 @@ const keyCodes = {
 
 class ButaneDialog {
   constructor (element, options) {
-    if (!element) {
-      throw new Error('Dialog requires an element reference')
-    }
-
     // Setup our default dialog options
-    this.options = {
-      bodyActiveClass: options.bodyActiveClass ? options.bodyActiveClass : 'dialog-isOpen',
-      dialogActiveClass: options.dialogActiveClass ? options.dialogActiveClass : 'is-active',
-      contentContainer: options.contentContainer ? options.contentContainer : '#main'
+    this.defaults = {
+      bodyActiveClass: 'dialog-isOpen',
+      dialogActiveClass: 'is-active',
+      contentContainer: '#main'
     };
-
+    this.config = Object.assign({}, this.defaults, options);
     this.dialogButton = element;
     this.dialogId = this.dialogButton.getAttribute('data-butane-dialog-controls');
     this.dialogElement = document.getElementById(this.dialogId);
 
     if (!this.dialogElement) {
-      throw new Error(`A Dialog with an ID of ${this.dialogId} does not exsist.`)
+      throw new Error(`A Dialog with an ID of ${this.dialogId} does not exist.`)
     }
 
     this.focusableElements = Array.from(
       this.dialogElement.querySelectorAll(focusableElements)
     );
     this.dialogHideElements = this.dialogElement.querySelectorAll('[data-butane-dialog-hide]');
-    this.contentContainer = document.querySelector(this.options.contentContainer);
+    this.contentContainer = document.querySelector(this.config.contentContainer);
 
     if (!this.contentContainer) {
-      throw new Error('No content container element was found')
+      throw new Error('No content container element was found.')
     }
 
     // Prebind the functions that will be bound in
@@ -76,10 +72,10 @@ class ButaneDialog {
     // Capture the previous active element
     this.previousActiveElement = document.activeElement;
     this.dialogIsVisible = true;
-    document.body.classList.add(this.options.bodyActiveClass);
+    document.body.classList.add(this.config.bodyActiveClass);
     this.dialogElement.inert = false;
     this.dialogElement.setAttribute('aria-hidden', false);
-    this.dialogElement.classList.add(this.options.dialogActiveClass);
+    this.dialogElement.classList.add(this.config.dialogActiveClass);
     this.contentContainer.inert = true;
 
     if (this.focusableElements.length > 0) {
@@ -96,10 +92,10 @@ class ButaneDialog {
   hide (e) {
     e.preventDefault();
     this.dialogIsVisible = false;
-    document.body.classList.remove(this.options.bodyActiveClass);
+    document.body.classList.remove(this.config.bodyActiveClass);
     this.dialogElement.inert = true;
     this.dialogElement.setAttribute('aria-hidden', true);
-    this.dialogElement.classList.remove(this.options.dialogActiveClass);
+    this.dialogElement.classList.remove(this.config.dialogActiveClass);
     this.contentContainer.inert = false;
 
     // Focus previous active element when hiding the dialog
