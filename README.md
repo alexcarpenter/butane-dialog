@@ -4,6 +4,10 @@
 
 > Accessible dialog JS library.
 
+<p align="right">
+  <img src="docs/logo.png" />
+</p>
+
 ## Install
 
 Install butane-dialog, and add it to your `package.json` dev dependencies.
