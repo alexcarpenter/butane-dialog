@@ -6,7 +6,7 @@ import { focusableElements, keyCodes } from './utils'
 class ButaneDialog {
   constructor (element, options) {
     if (!element) {
-      throw new Error('Dialog requires an element reference')
+      throw new Error('Dialog requires an element reference.')
     }
 
     // Setup our default dialog options
@@ -18,17 +18,20 @@ class ButaneDialog {
 
     this.dialogButton = element
     this.dialogId = this.dialogButton.getAttribute('data-butane-dialog-controls')
-
     this.dialogElement = document.getElementById(this.dialogId)
-    this._focusableElements = Array.from(
+
+    if (!this.dialogElement) {
+      throw new Error(`A Dialog with an ID of ${this.dialogId} does not exist.`)
+    }
+
+    this.focusableElements = Array.from(
       this.dialogElement.querySelectorAll(focusableElements)
     )
     this.dialogHideElements = this.dialogElement.querySelectorAll('[data-butane-dialog-hide]')
-
     this.contentContainer = document.querySelector(this.options.contentContainer)
 
     if (!this.contentContainer) {
-      throw new Error('No content container element was found')
+      throw new Error('No content container element was found.')
     }
 
     // Prebind the functions that will be bound in
@@ -71,8 +74,8 @@ class ButaneDialog {
     this.dialogElement.classList.add(this.options.dialogActiveClass)
     this.contentContainer.inert = true
 
-    if (this._focusableElements.length > 0) {
-      this._focusableElements[0].focus()
+    if (this.focusableElements.length > 0) {
+      this.focusableElements[0].focus()
     }
   }
 

@@ -40,7 +40,7 @@ ButaneDialog.init({
 </main>
 
 <div class="c-dialog" id="dialog" aria-hidden="true">
-  <div class="c-dialog__content" role="dialog" aria-labelledby="dialog-title">
+  <div class="c-dialog__content" role="dialog" aria-labelledby="dialog-title" aria-modal="true">
     <header class="c-dialog__header">
       <h2 id="dialog-title">Dialog</h2>
       <button data-butane-dialog-hide>Close</button>
